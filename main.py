@@ -10,7 +10,7 @@ from pathlib import Path
 
 JOKE = (
     "During the demo, my coding agent autocompleted my script on the big "
-    "screen \u2014 it typed 'TODO: fix this before the demo' in front of everyone."
+    "screen \u2014 it typed 'TODO: fix this before the demo' in front of the whole room."
 )
 
 
@@ -20,6 +20,8 @@ def main() -> None:
     text = JOKE.strip()
     if not 1 <= len(text) <= 280:
         raise ValueError(f"joke must be 1-280 chars, got {len(text)}")
+    if "\n" in text:
+        raise ValueError("joke must be a single line")
     (out_dir / "entry.txt").write_text(text, encoding="utf-8")
 
 
